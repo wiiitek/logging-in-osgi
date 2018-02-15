@@ -1,0 +1,11 @@
+
+# IntelliJ
+*.iml
+/.idea/
+!/.idea/codeStyles/
+
+# Maven
+target/
+
+/src/main/resources/dependencies-report.txt
+/src/main/resources/plugins-report.txt
