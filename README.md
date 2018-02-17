@@ -7,6 +7,8 @@ This is a sample project that shows how logging could be configured for [Felix] 
 * [JUL](#java-util-logging)
 * [Apache Commons Logging](#apache-commons-logging)
 * [Apache log4j 1.x](#apache-log4j-1.x)
+* Apache log4j 2.x (not ready yet)
+* [OSGi Log Service](#osgi-log-service)
 
 ### SLF4J
 
@@ -52,7 +54,11 @@ Their log messages will be forwarded to SLF4J if we add additional bundle:
 
 * org.slf4j: [log4j-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j/1.7.25)
 
+### OSGi Log Service
 
+To forward logs from OSGi Log Service to LSF4J additional bundle is needed:
+
+* org.slf4j: [osgi-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/osgi-over-slf4j/1.7.25)
 
 
 
