@@ -1,7 +1,15 @@
 logging-in-osgi
 ===============
 
-This is a sample project that shows how logging could be configured for [Felix] framework:
+This is a sample project that shows how logging could be configured for [Felix] framework.
+Third party bundles may be using various logging frameworks.
+We want to configure the log messages in one place.
+
+* [Logging APIs](#logging-apis)
+* [Logging Implementations](#logging-implementations)
+
+Logging APIs
+------------
 
 * [SLF4J](#slf4j)
 * [JAVA Util Logging](#java-util-logging)
@@ -26,7 +34,7 @@ java -Dlogback.configurationFile=logback.xml -jar bin\felix.jar
 
 Target project requires dependency to `slf4j-api` only.
 
-### JAVA util logging
+### JAVA Util Logging
 
 In order to forward JAVA util logging to SLF4J two more things are needed:
 
@@ -34,7 +42,7 @@ In order to forward JAVA util logging to SLF4J two more things are needed:
 2. Additional configuration for JAVA logging over SLF4J (see *jul-configuration* module)
 
 Please notice that for production purposes the [LevelChangePropagator][jul-to-slf4j] should be installed!
-This can be done by adding following line in [logback.xml][logback.xml-for-jul]:
+This can be done by adding following line in [logback.xml][logback.xml-example]:
 
 ```xml
 <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
@@ -70,11 +78,27 @@ To forward logs from OSGi Log Service to LSF4J additional bundle is needed:
 
 * org.slf4j: [osgi-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/osgi-over-slf4j/1.7.25)
 
+Logging Implementations
+-----------------------
+
+### Logback Groovy Configuration
+
+This project uses LOGBack for log messages.
+It is possible to keep LOGBack configuration in [groovy][logback.groovy-example] file.
+There is [online translator][logback-xml2groovy] that converts XML configuration to Groovy.
+To read this configuration LOGBack needs additional bundle:
+
+* org.codehaus.groovy: [groovy](https://mvnrepository.com/artifact/org.codehaus.groovy/groovy)
+
+
+
 
 
 [Felix]: http://felix.apache.org/downloads.cgi
 [SLF4J]: https://www.slf4j.org/
 [LOGBack]: https://logback.qos.ch/
 [jul-to-slf4j]: https://www.slf4j.org/legacy.html#jul-to-slf4j
-[logback.xml-for-jul]: https://github.com/wiiitek/logging-in-osgi/tree/master/samples/samples-jul/src/main/resources/logback.xml#L4
+[logback.xml-example]: https://github.com/wiiitek/logging-in-osgi/tree/master/logback/logback-configuration/src/main/resources/logback.xml#L4
+[logback.groovy-example]: https://github.com/wiiitek/logging-in-osgi/tree/master/logback/logback-configuration/src/main/resources/logback.groovy
 [log4j-1.x]: https://logging.apache.org/log4j/1.2/
+[logback-xml2groovy]: https://logback.qos.ch/translator/asGroovy.html

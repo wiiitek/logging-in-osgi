@@ -13,6 +13,7 @@
 
   <modules>
     <module>jul-configuration</module>
+    <module>logback</module>
     <module>samples</module>
   </modules>
 
@@ -68,6 +69,19 @@
         <version>${version.slf4j}</version>
         <scope>provided</scope>
       </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${version.logback}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${version.logback}</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -80,15 +94,16 @@
           <version>3.5.0</version>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>wagon-maven-plugin</artifactId>
+          <version>1.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
   </build>
 
   <profiles>
+    <!-- download dependencies from Maven for easier testing -->
     <profile>
       <id>deps</id>
       <build>
@@ -98,34 +113,25 @@
             <artifactId>maven-dependency-plugin</artifactId>
             <executions>
               <execution>
-                <inherited>false</inherited>
                 <phase>install</phase>
                 <goals>
                   <goal>copy</goal>
                 </goals>
+                <inherited>false</inherited>
                 <configuration>
                   <artifactItems>
-                    <!-- bundle for JUL configuration update -->
-                    <artifactItem>
-                      <groupId>pl.kubiczak.osgi.logging</groupId>
-                      <artifactId>jul-configuration</artifactId>
-                      <version>${project.version}</version>
-                    </artifactItem>
                     <!-- SLF4J and LOGBack base bundles -->
                     <artifactItem>
                       <groupId>org.slf4j</groupId>
                       <artifactId>slf4j-api</artifactId>
-                      <version>${version.slf4j}</version>
                     </artifactItem>
                     <artifactItem>
                       <groupId>ch.qos.logback</groupId>
                       <artifactId>logback-classic</artifactId>
-                      <version>${version.logback}</version>
                     </artifactItem>
                     <artifactItem>
                       <groupId>ch.qos.logback</groupId>
                       <artifactId>logback-core</artifactId>
-                      <version>${version.logback}</version>
                     </artifactItem>
                     <!-- other dependencies from SLF4J -->
                     <artifactItem>
@@ -160,30 +166,38 @@
                       <version>2.8.2</version>
                     </artifactItem>
                   </artifactItems>
-                  <outputDirectory>${project.build.directory}/bundles</outputDirectory>
+                  <outputDirectory>${project.build.directory}/deps</outputDirectory>
                   <prependGroupId>true</prependGroupId>
                 </configuration>
               </execution>
             </executions>
           </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- download Felix framework for easier testing -->
+    <profile>
+      <id>felix</id>
+      <properties>
+        <version.felix>5.6.10</version.felix>
+        <felix.mirror>https://repo1.maven.org/maven2/org/apache/felix/org.apache.felix.main.distribution</felix.mirror>
+        <felix.filename>org.apache.felix.main.distribution-${version.felix}.zip</felix.filename>
+      </properties>
+      <build>
+        <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>wagon-maven-plugin</artifactId>
             <executions>
               <execution>
-                <inherited>false</inherited>
-                <phase>install</phase>
+                <phase>initialize</phase>
                 <goals>
-                  <goal>copy-resources</goal>
+                  <goal>download-single</goal>
                 </goals>
                 <configuration>
-                  <resources>
-                    <resource>
-                      <directory>${project.basedir}/samples/samples-jul/src/main/resources</directory>
-                    </resource>
-                  </resources>
-                  <outputDirectory>${project.build.directory}/bundles</outputDirectory>
-                  <overwrite>true</overwrite>
+                  <url>${felix.mirror}/${version.felix}</url>
+                  <fromFile>${felix.filename}</fromFile>
+                  <toDir>${project.build.directory}</toDir>
                 </configuration>
               </execution>
             </executions>
