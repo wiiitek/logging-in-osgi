@@ -6,6 +6,3 @@
 
 # Maven
 target/
-
-/src/main/resources/dependencies-report.txt
-/src/main/resources/plugins-report.txt
