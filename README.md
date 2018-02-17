@@ -30,6 +30,12 @@ In order to forward JAVA util logging to SLF4J two more things are needed:
 2. Additional configuration for JAVA logging over SLF4J (see *jul-configuration* module)
 
 Please notice that for production purposes the [LevelChangePropagator][jul-to-slf4j] should be installed!
+This can be done by adding following line in [logback.xml][logback.xml-for-jul]:
+
+```xml
+<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+```
+
 
 
 
@@ -37,3 +43,4 @@ Please notice that for production purposes the [LevelChangePropagator][jul-to-sl
 [SLF4J]: https://www.slf4j.org/
 [LOGBack]: https://logback.qos.ch/
 [jul-to-slf4j]: https://www.slf4j.org/legacy.html#jul-to-slf4j
+[logback.xml-for-jul]: https://github.com/wiiitek/logging-in-osgi/tree/master/samples/samples-jul/src/main/resources/logback.xml#L4
