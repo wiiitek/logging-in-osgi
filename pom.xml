@@ -20,6 +20,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <version.slf4j>1.7.25</version.slf4j>
+    <version.logback>1.2.3</version.logback>
     <version.log4j2>2.8.2</version.log4j2>
   </properties>
 
@@ -78,7 +79,117 @@
           <artifactId>maven-bundle-plugin</artifactId>
           <version>3.5.0</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
+
+  <profiles>
+    <profile>
+      <id>deps</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <inherited>false</inherited>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <!-- bundle for JUL configuration update -->
+                    <artifactItem>
+                      <groupId>pl.kubiczak.osgi.logging</groupId>
+                      <artifactId>jul-configuration</artifactId>
+                      <version>${project.version}</version>
+                    </artifactItem>
+                    <!-- SLF4J and LOGBack base bundles -->
+                    <artifactItem>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>slf4j-api</artifactId>
+                      <version>${version.slf4j}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>ch.qos.logback</groupId>
+                      <artifactId>logback-classic</artifactId>
+                      <version>${version.logback}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>ch.qos.logback</groupId>
+                      <artifactId>logback-core</artifactId>
+                      <version>${version.logback}</version>
+                    </artifactItem>
+                    <!-- other dependencies from SLF4J -->
+                    <artifactItem>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>jcl-over-slf4j</artifactId>
+                      <version>${version.slf4j}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>jul-to-slf4j</artifactId>
+                      <version>${version.slf4j}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>log4j-over-slf4j</artifactId>
+                      <version>${version.slf4j}</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>osgi-over-slf4j</artifactId>
+                      <version>${version.slf4j}</version>
+                    </artifactItem>
+                    <!-- other dependencies -->
+                    <artifactItem>
+                      <groupId>org.apache.logging.log4j</groupId>
+                      <artifactId>log4j-api</artifactId>
+                      <version>2.8.2</version>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.apache.logging.log4j</groupId>
+                      <artifactId>log4j-to-slf4j</artifactId>
+                      <version>2.8.2</version>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>${project.build.directory}/bundles</outputDirectory>
+                  <prependGroupId>true</prependGroupId>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <inherited>false</inherited>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <directory>${project.basedir}/samples/samples-jul/src/main/resources</directory>
+                    </resource>
+                  </resources>
+                  <outputDirectory>${project.build.directory}/bundles</outputDirectory>
+                  <overwrite>true</overwrite>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
