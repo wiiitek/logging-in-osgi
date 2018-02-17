@@ -4,7 +4,7 @@ logging-in-osgi
 This is a sample project that shows how logging could be configured for [Felix] framework:
 
 * [SLF4J](#slf4j)
-* [JUL](#java-util-logging)
+* [JAVA Util Logging](#java-util-logging)
 * [Apache Commons Logging](#apache-commons-logging)
 * [Apache log4j 1.x](#apache-log4j-1.x)
 * [Apache log4j 2.x](#apache-log4j-2.x)
