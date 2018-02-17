@@ -7,7 +7,7 @@ This is a sample project that shows how logging could be configured for [Felix] 
 * [JUL](#java-util-logging)
 * [Apache Commons Logging](#apache-commons-logging)
 * [Apache log4j 1.x](#apache-log4j-1.x)
-* Apache log4j 2.x (not ready yet)
+* [Apache log4j 2.x](#apache-log4j-2.x)
 * [OSGi Log Service](#osgi-log-service)
 
 ### SLF4J
@@ -53,6 +53,16 @@ However there might be still some bundles that use it as logging framework.
 Their log messages will be forwarded to SLF4J if we add additional bundle:
 
 * org.slf4j: [log4j-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j/1.7.25)
+
+### Apache log4j 2.x
+
+There is an issue for OSGi setup with newest version of log4j in OSGi and fileinstall.
+Following setup was tested with version 2.8.2.
+
+In order to pass log4j 2.x messages to SLF4J additional two bundles are needed:
+
+* org.apache.logging.log4j: [log4j-api](https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api/2.8.2)
+* org.apache.logging.log4j: [log4j-to-slf4j](https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j/2.8.2)
 
 ### OSGi Log Service
 

@@ -18,6 +18,7 @@
     <module>samples-acl</module>
     <module>samples-jul</module>
     <module>samples-log4j</module>
+    <module>samples-log4j2</module>
     <module>samples-logservice</module>
     <module>samples-slf4j</module>
   </modules>

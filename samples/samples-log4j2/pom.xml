@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>samples</artifactId>
+    <groupId>pl.kubiczak.osgi.logging</groupId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>samples-log4j2</artifactId>
+  <packaging>bundle</packaging>
+
+  <name>Logging in OSGi: Samples: log4j</name>
+  <description>Sample bundle with logs using log4j 1.x in OSGi</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>default-bundle</id>
+            <phase>package</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+            <configuration>
+              <instructions>
+                <Export-Package/>
+                <Import-Package>
+                  org.osgi.framework;version="[1.8,2)",
+                  org.apache.logging.log4j;version="[2,3)"
+                </Import-Package>
+                <Bundle-Activator>pl.kubiczak.osgi.logging.samples.log4j2.Activator</Bundle-Activator>
+              </instructions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
