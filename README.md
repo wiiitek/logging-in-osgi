@@ -5,6 +5,8 @@ This is a sample project that shows how logging could be configured for [Felix] 
 
 * [SLF4J](#slf4j)
 * [JUL](#java-util-logging)
+* [Apache Commons Logging](#apache-commons-logging)
+* [Apache log4j 1.x](#apache-log4j-1.x)
 
 ### SLF4J
 
@@ -36,6 +38,21 @@ This can be done by adding following line in [logback.xml][logback.xml-for-jul]:
 <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
 ```
 
+### Apache Commons Logging
+
+To forward logs from commons-logging to SLF4J we need additional bundle:
+
+* org.slf4j: [jcl-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j/1.7.25)
+
+### Apache log4j 1.x
+
+Apache announced that [log4j 1.x][log4j-1.x] reached end of life on 2015-08-05.
+However there might be still some bundles that use it as logging framework.
+Their log messages will be forwarded to SLF4J if we add additional bundle:
+
+* org.slf4j: [log4j-over-slf4j](https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j/1.7.25)
+
+
 
 
 
@@ -44,3 +61,4 @@ This can be done by adding following line in [logback.xml][logback.xml-for-jul]:
 [LOGBack]: https://logback.qos.ch/
 [jul-to-slf4j]: https://www.slf4j.org/legacy.html#jul-to-slf4j
 [logback.xml-for-jul]: https://github.com/wiiitek/logging-in-osgi/tree/master/samples/samples-jul/src/main/resources/logback.xml#L4
+[log4j-1.x]: https://logging.apache.org/log4j/1.2/

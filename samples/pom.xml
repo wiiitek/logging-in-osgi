@@ -15,7 +15,9 @@
   <description>Contains modules with sample usage of different logging frameworks</description>
 
   <modules>
+    <module>samples-acl</module>
     <module>samples-jul</module>
+    <module>samples-log4j</module>
     <module>samples-slf4j</module>
   </modules>
 
