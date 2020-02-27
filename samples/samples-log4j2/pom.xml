@@ -11,7 +11,7 @@
   <artifactId>samples-log4j2</artifactId>
   <packaging>bundle</packaging>
 
-  <name>Logging in OSGi: Samples: log4j</name>
+  <name>Logging in OSGi: Samples: log4j2</name>
   <description>Sample bundle with logs using log4j 1.x in OSGi</description>
 
   <dependencies>

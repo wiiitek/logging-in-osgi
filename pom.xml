@@ -91,7 +91,7 @@
         <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>4.2.1</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -113,7 +113,7 @@
             <artifactId>maven-dependency-plugin</artifactId>
             <executions>
               <execution>
-                <phase>install</phase>
+                <phase>package</phase>
                 <goals>
                   <goal>copy</goal>
                 </goals>
@@ -179,7 +179,7 @@
     <profile>
       <id>felix</id>
       <properties>
-        <version.felix>5.6.10</version.felix>
+        <version.felix>6.0.3</version.felix>
         <felix.mirror>https://repo1.maven.org/maven2/org/apache/felix/org.apache.felix.main.distribution</felix.mirror>
         <felix.filename>org.apache.felix.main.distribution-${version.felix}.zip</felix.filename>
       </properties>
