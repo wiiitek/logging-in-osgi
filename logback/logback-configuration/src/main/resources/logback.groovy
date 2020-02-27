@@ -1,5 +1,5 @@
 //
-// Built on Sat Feb 17 17:36:20 CET 2018 by logback-translator
+// Built on Thu Feb 27 13:09:24 CET 2020 by logback-translator
 // For more information on configuration files in Groovy
 // please see http://logback.qos.ch/manual/groovy.html
 
@@ -11,7 +11,9 @@
 //   http://www.qos.ch/shop/products/professionalSupport
 
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder
-
+import ch.qos.logback.core.ConsoleAppender
+import ch.qos.logback.core.rolling.RollingFileAppender
+import ch.qos.logback.core.rolling.TimeBasedRollingPolicy
 import java.nio.charset.Charset
 
 import static ch.qos.logback.classic.Level.DEBUG
@@ -34,7 +36,5 @@ appender("FILE", RollingFileAppender) {
         pattern = "%d{HH:mm:ss.SSS} %-5level %logger:%L - %msg%n"
     }
 }
-
 logger("pl.kubiczak", DEBUG, ["FILE"], false)
-
 root(WARN, ["FILE"])
