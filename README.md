@@ -8,6 +8,24 @@ We want to configure the log messages in one place.
 * [Logging APIs](#logging-apis)
 * [Logging Implementations](#logging-implementations)
 
+How to Run this project
+-----------------------
+
+1. Download Apache felix and required dependencies into `${project.build.directory}` folder (`./target`):
+
+    ```commandline
+    mvn clean package -Pdeps,felix
+    ```
+
+1. Unzip Apache felix framework into `felix` folder.
+1. Copy jars from `./target/deps` folder into `felix/bundle/` folder.
+1. Copy JUL configuration bundle (`jul-configuration-0.1.0-SNAPSHOT.jar`) into `felix/bundle/` folder.
+1. Copy sample logging bundles into `felix/bundle/` folder.
+1. Copy `logback.xml` configuration file into `felix/` folder.
+1. Run Felix with `java -Dlogback.configurationFile=logback.xml -jar bin\felix.jar`
+
+You can now find sample logs in `felix/logs` folder.
+
 Logging APIs
 ------------
 
